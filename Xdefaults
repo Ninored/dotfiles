@@ -1,0 +1,21 @@
+#include ".dracula.x"
+Xft.antialias:          true
+
+urxvt.perl-ext-common:  resize-font
+urxvt.scrollBar: false
+urxvt.font: xft:SauceCodePro Nerd Font Mono:pixelsize=14
+
+
+! Powerline tweaks
+urxvt.lineSpace:		-1
+urxvt.letterSpace: 		-1
+
+urxvt.keysym.C-Down:  resize-font:smaller
+urxvt.keysym.C-Up:    resize-font:bigger
+
+! ROFI
+rofi.color-window: #34343e, #759496, #759496
+rofi.color-normal: #34343e, #b0c4bb, #759496, #b0c4bb, #78824B
+rofi.color-active: #34343e, #b0c4bb, #759496, #b0c4bb, #78824B
+rofi.color-urgent: #34343e, #b0c4bb, #759496, #b0c4bb, #78824B
+rofi.font: SauceCodePro Nerd Font 10
