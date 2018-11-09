@@ -1,5 +1,6 @@
 eval (direnv hook fish)
 eval (opam config env)
+eval (opam env)
 eval (python -m virtualfish)
 set -g theme_color_scheme dracula
 set -g theme_display_virtualenv yes
