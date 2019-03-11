@@ -67,7 +67,9 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Tools
+Plug 'kshenoy/vim-signature'
 Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle'}
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on' : 'NERDTreeToggle' }
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -81,12 +83,14 @@ Plug 'dbeniamine/cheat.sh-vim'
 Plug 'tmhedberg/matchit'
 Plug 'khzaw/vim-conceal'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-Plug 'joegesualdo/jsdoc.vim'
+"Plug 'joegesualdo/jsdoc.vim'
+Plug 'junegunn/vim-emoji'
 
 
 " GIT
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/vim-github-dashboard'
 
 " Comments
 Plug 'scrooloose/nerdcommenter'
@@ -98,7 +102,8 @@ Plug 'mattn/emmet-vim', {'for': ['html', 'javascript']}
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --js-completer --rust-completer --java-completer --clang-completer --enable-coverage'}
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
-Plug 'ervandew/eclim'
+Plug 'ervandew/eclim', {'for': 'java'}
+Plug 'ternjs/tern_for_vim', { 'do' : 'npm install' }
 
 " Latex
 Plug 'lervag/vimtex'
@@ -125,6 +130,17 @@ set softtabstop=2
 set mouse=a
 set encoding=UTF-8
 set nospell
+set so=999
+set hidden
+
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
 color dracula
 
 " Set conceal
@@ -219,10 +235,21 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_min_num_of_chars_for_completion = 99
 set completeopt-=preview
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar': 1,
+      \ 'qf': 1,
+      \ 'notes': 1,
+      \ 'markdown': 1,
+      \ 'unite': 1,
+      \ 'text': 1,
+      \ 'vimwiki': 1,
+      \ 'pandoc': 1,
+      \ 'infolog': 1,
+      \ 'mail': 1
+      \}
 
 " Autotag
 let g:fzf_tags_command = 'ctags -f .tags -R'
-let g:autotagTagsFile=".tags"
 
 " Pandoc
 let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
@@ -237,6 +264,9 @@ noremap <leader>t :vert term<CR>
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='luna'
+let g:airline_powerline_fonts = 1
+let g:airline_highlighting_cache = 1
+let g:airline_extensions = []
 
 " Buffer manipulation
 noremap <C-b>n :bn<CR>
@@ -250,6 +280,13 @@ noremap <C-g>c :Commits<CR>
 
 " Fugitive
 noremap <C-g>s :Gstatus<CR>
+
+" Git gutter
+let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
+let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
+let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
+let g:gitgutter_sign_modified_removed = emoji#for('collision')
+set completefunc=emoji#complete
 
 " Vim Polyglot
 let g:polyglot_disabled = ['latex', 'markdown', 'python']
